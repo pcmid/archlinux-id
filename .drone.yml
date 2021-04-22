@@ -31,9 +31,6 @@ steps:
   image: alpine/git
   commands:
     - ./build.sh find_packages
-  when:
-    ref:
-    - refs/heads/package/*
 - name: build
   pull: always
   image: pcmid/arch-builder
@@ -43,8 +40,7 @@ steps:
     - ./build.sh
   when:
     ref:
-      include:
-      - refs/heads/package/*
+    - refs/heads/package/*
 
 trigger:
   event:
