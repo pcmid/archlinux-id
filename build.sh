@@ -33,5 +33,4 @@ main() {
     esac
 }
 
-ls -al -R .git/refs/heads
 main $@

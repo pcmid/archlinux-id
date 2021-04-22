@@ -40,7 +40,7 @@ steps:
     - ./build.sh
   when:
     branch:
-      package/*
+    - package/*
 
 trigger:
   event:
