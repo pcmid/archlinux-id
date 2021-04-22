@@ -2,7 +2,19 @@
 set -x
 
 find_packages() {
-    git diff --name-status ${DRONE_COMMIT_BEFORE} repo/*/PKGBUILD | sed -r 's/^[AM]\trepo\/(.*)\/PKGBUILD$/\1/g'| sort | uniq | tee .build_packages | xargs printf "find package: %s\n" 
+    last=${DRONE_COMMIT_BEFORE}
+    if [[ z"${DRONE_COMMIT_BRANCH}" != z"master"  ]]
+    then
+        git fetch origin master
+        last="origin/master"
+    fi
+    
+    build_packages=$(git diff --name-status ${last} repo/*/PKGBUILD | sed -r 's/^[AM]\trepo\/(.*)\/PKGBUILD$/\1/g'| sort | uniq | tee .build_packages)
+    if [ -z "${build_packages}" ]
+    then
+        echo "Package not found!"
+        exit 255
+    fi
 }
 
 build_package() {
