@@ -3,7 +3,7 @@ set -x
 
 find_packages() {
     last=${DRONE_COMMIT_BEFORE}
-    if [[ z"${DRONE_COMMIT_BRANCH}" != z"master"  ]]
+    if [[ z"${DRONE_COMMIT_BRANCH}" != z"master" ]]
     then
         git fetch origin master
         last="origin/master"
@@ -20,11 +20,12 @@ find_packages() {
 build_package() {
     package=$1
     pushd repo/${package}/
-    makepkg -csf
+    makepkg -csf --noconfirm --skippgpcheck
     popd
 }
 
 build_all() {
+    sudo pacman -Sy
     while read package
     do
         build_package ${package}
