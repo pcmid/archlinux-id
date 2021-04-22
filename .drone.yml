@@ -1,0 +1,50 @@
+---
+kind: pipeline
+type: kubernetes
+name: testing
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: test
+  # do nothing
+trigger:
+  event:
+    - pull_request
+
+---
+kind: pipeline
+type: kubernetes
+name: build
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: find_packages
+  pull: if-not-exists
+  image: alpine/git
+  commands:
+    - ./build.sh find_packages
+  when:
+    ref:
+      include:
+      - refs/heads/package/**
+- name: build
+  pull: always
+  image: pcmid/arch-builder
+  environment:
+    SRCDEST: /packages
+  commands:
+    - ./build.sh
+  when:
+    ref:
+      include:
+      - refs/heads/package/**
+
+trigger:
+  event:
+    - pull_request
