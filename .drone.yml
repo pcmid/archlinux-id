@@ -10,6 +10,8 @@ platform:
 steps:
 - name: test
   # do nothing
+  pull: if-not-exists
+  image: alpine/git
 trigger:
   event:
     - pull_request
