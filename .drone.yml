@@ -45,3 +45,6 @@ steps:
 trigger:
   event:
   - pull_request
+
+depends_on:
+  - testing
