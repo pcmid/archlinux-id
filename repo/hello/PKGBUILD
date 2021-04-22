@@ -1,7 +1,7 @@
 #Maintainer: leo <leotemplin@yahoo.de>
 pkgname=hello
 pkgver=2.10
-pkgrel=2
+pkgrel=3
 pkgdesc="Prints Hello World and more"
 arch=(i686 x86_64)
 url='https://gnu.org'

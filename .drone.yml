@@ -34,6 +34,7 @@ steps:
   - ./build.sh find_packages
   when:
     branch:
+    - master
     - package/*
 
 - name: build
