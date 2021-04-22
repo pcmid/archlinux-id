@@ -39,8 +39,8 @@ steps:
   commands:
     - ./build.sh
   when:
-    ref:
-    - refs/heads/package/*
+    branch:
+      package/*
 
 trigger:
   event:
