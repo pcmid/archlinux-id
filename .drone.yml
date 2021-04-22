@@ -33,8 +33,7 @@ steps:
     - ./build.sh find_packages
   when:
     ref:
-      include:
-      - refs/heads/package/**
+    - refs/heads/package/**
 - name: build
   pull: always
   image: pcmid/arch-builder
