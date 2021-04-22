@@ -67,7 +67,7 @@ pkgver=5.11.16
 _major=5.11
 _branch=5.x
 xanmod=1
-pkgrel=2
+pkgrel=3
 pkgdesc='Linux Xanmod. Branch with Cacule scheduler by Hamad Marri'
 url="http://www.xanmod.org/"
 arch=(x86_64)
@@ -197,9 +197,6 @@ prepare() {
   if [ x"${_makenconfig}" == x"y" ];then
     make nconfig
   fi
-
-  # save configuration for later reuse
-  cat .config > "${startdir}/config.last"
 }
 
 build() {
