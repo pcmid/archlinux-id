@@ -47,10 +47,11 @@ steps:
   when:
     branch:
     - master
+    - package/*
 
 trigger:
   event:
-  - pull_request
+  - push
 
 depends_on:
   - test

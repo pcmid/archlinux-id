@@ -33,4 +33,5 @@ main() {
     esac
 }
 
+env
 main $@
