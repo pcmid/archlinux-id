@@ -2,7 +2,7 @@
 set -x
 
 find_packages() {
-    git diff --name-status ${DRONE_PREV_COMMIT_SHA} repo/*/PKGBUILD | sed -r 's/^[AM]\trepo\/(.*)\/PKGBUILD$/\1/g'| sort | uniq | tee .build_packages | xargs printf "find package: %s\n" 
+    git diff --name-status ${DRONE_COMMIT_BEFORE} repo/*/PKGBUILD | sed -r 's/^[AM]\trepo\/(.*)\/PKGBUILD$/\1/g'| sort | uniq | tee .build_packages | xargs printf "find package: %s\n" 
 }
 
 build_package() {
@@ -33,5 +33,4 @@ main() {
     esac
 }
 
-env
 main $@
