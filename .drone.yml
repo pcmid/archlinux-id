@@ -14,7 +14,7 @@ steps:
   image: alpine/git
 trigger:
   event:
-    - pull_request
+  - pull_request
 
 ---
 kind: pipeline
@@ -33,7 +33,7 @@ steps:
     - ./build.sh find_packages
   when:
     ref:
-    - refs/heads/package/**
+    - refs/heads/package/*
 - name: build
   pull: always
   image: pcmid/arch-builder
@@ -44,8 +44,8 @@ steps:
   when:
     ref:
       include:
-      - refs/heads/package/**
+      - refs/heads/package/*
 
 trigger:
   event:
-    - pull_request
+  - pull_request
