@@ -45,5 +45,4 @@ main() {
     esac
 }
 
-env
 main $@
