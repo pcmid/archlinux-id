@@ -1,7 +1,7 @@
 ---
 kind: pipeline
 type: kubernetes
-name: testing
+name: test
 
 platform:
   os: linux
@@ -14,7 +14,7 @@ steps:
   image: alpine/git
 trigger:
   event:
-    - pull_request
+  - pull_request
 
 ---
 kind: pipeline
@@ -30,23 +30,28 @@ steps:
   pull: if-not-exists
   image: alpine/git
   commands:
-    - ./build.sh find_packages
+  - ./build.sh find_packages
   when:
-    ref:
-      include:
-      - refs/heads/package/**
+    branch:
+    - master
+    - package/*
+
 - name: build
   pull: always
   image: pcmid/arch-builder
   environment:
+    BUILDDIR: /build
     SRCDEST: /packages
   commands:
-    - ./build.sh
+  - ./build.sh
   when:
-    ref:
-      include:
-      - refs/heads/package/**
+    branch:
+    - master
 
 trigger:
-  event:
-    - pull_request
+  branch:
+  - master
+  - package/*
+
+depends_on:
+  - test
